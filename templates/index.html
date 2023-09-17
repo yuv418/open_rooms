@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<style>
+		 .panels {
+			 display: flex;
+			 flex-direction: row;
+		 }
+		</style>
+	</head>
+	<body>
+		<h1>Free classroom finder</h1>
+		<div class="panels">
+		<form method="POST">
+			<select name="day">
+				<option value="M">Monday</option>
+				<option value="T">Tuesday</option>
+				<option value="W">Wednesday</option>
+				<option value="H">Thursday</option>
+				<option value="F">Friday</option>
+				<option value="S">Saturday</option>
+				<option value="U">Sunday</option>
+			</select><br><br>
+			Start time: <input type="time" name="start_time" required /> <br><br>
+			End time: <input type="time" name="end_time" required /> <br><br>
+			<input type="submit"/>
+		</form>
+
+		{% if rooms|length > 0 %}
+		<ul>
+			{% for open_room in rooms %}
+			<li>{{ open_room }}</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+		</div>
+	</body>
+</html>
