@@ -3,34 +3,90 @@
 <html>
 	<head>
 		<style>
+		@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono');
+		 body {
+			 background-color: #ebf4cd;
+			 padding: 0.5rem 2rem;
+		 }
 		 .panels {
 			 display: flex;
 			 flex-direction: row;
 		 }
+		 .finder-form {
+			 box-shadow: 17px 17px black;
+			 height: fit-content;
+			 padding: 20px;
+			 min-width: 20%;
+			 background-color: #444;
+		 }
+		 .finder-form label {
+			 color: white;
+		 }
+		 .finder-form input, .finder-form select {
+			 padding: 7px;
+			 font-family: "JetBrains Mono", monospace;
+			 border: 1px solid blue;
+			 background-color: aliceblue;
+		 }
+		 .finder-form input[type=submit] {
+			 border: 1px solid #823554;
+			 background-color:  #4f2133;
+			 color: white;
+			 padding: 7px;
+			 font-weight: bold;
+			 font-family: "JetBrains Mono", monospace;
+		 }
+		 .finder-form input[type=submit]:hover {
+			 cursor: pointer;
+		 }
+		 * {
+			 font-family: 'Roboto', sans-serif;
+		 }
+		 .room-list {
+			 margin-left: 3rem;
+			 display: flex;
+			 flex-wrap: wrap;
+		 }
+		 .room-list > a {
+			 margin-bottom: 10px;
+			 margin-left: 10px;
+			 font-family: 'JetBrains Mono', monospace;
+			 font-size: 15px;
+			 border: 1px solid #333;
+			 background-color: #000;
+			 color: white;
+			 font-weight: bold;
+			 padding: 7px;
+		 }
 		</style>
 	</head>
 	<body>
-		<h1>Free classroom finder</h1>
+		<h1>Free Classroom Finder</h1>
 		<div class="panels">
-		<form method="POST">
-			<select name="day">
-				<option value="M">Monday</option>
-				<option value="T">Tuesday</option>
-				<option value="W">Wednesday</option>
-				<option value="H">Thursday</option>
-				<option value="F">Friday</option>
-				<option value="S">Saturday</option>
-				<option value="U">Sunday</option>
-			</select><br><br>
-			Start time: <input type="time" name="start_time" required /> <br><br>
-			End time: <input type="time" name="end_time" required /> <br><br>
-			<input type="submit"/>
-		</form>
+			<div class="finder-form">
+				<form method="POST">
+					<label for="day">Day:</label><br><br>
+					<select name="day" value="{{ day }}">
+						<option value="M">Monday</option>
+						<option value="T">Tuesday</option>
+						<option value="W">Wednesday</option>
+						<option value="H">Thursday</option>
+						<option value="F">Friday</option>
+						<option value="S">Saturday</option>
+						<option value="U">Sunday</option>
+					</select><br><br>
+					<label for="start_time">Start Time:</label><br><br>
+					<input type="time" name="start_time" value="{{ start_time }}" required /> <br><br>
+					<label for="end_time">End Time:</label><br><br>
+					<input type="time" name="end_time" value="{{ end_time }}" required /> <br><br>
+					<input type="submit" value="Find Rooms!"/>
+				</form>
+			</div>
 
 		{% if rooms|length > 0 %}
-		<ul>
+		<div class="room-list">
 			{% for open_room in rooms %}
-			<li>{{ open_room }}</li>
+			<a>{{ open_room }}</a>
 			{% endfor %}
 		</ul>
 		{% endif %}

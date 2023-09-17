@@ -100,7 +100,11 @@ def index():
         except ValueError:
             flash("Invalid input.")
 
-    return render_template("index.html", rooms=rooms)
+    return render_template("index.html",
+                           rooms=rooms,
+                           day=request.values.get("day"),
+                           start_time=request.values.get("start_time"),
+                           end_time=request.values.get("end_time"))
 
 
 if __name__ == "__main__":
